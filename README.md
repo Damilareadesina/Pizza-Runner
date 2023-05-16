@@ -123,24 +123,28 @@ FROM customer_orders
 GROUP BY DAY(order_time)
 ORDER BY day_of_the_month;
 
+  <p align="center"> 
+ B. Runner and Customer Experience
 
--- B. Runner and Customer Experience
 
--- 1)How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
+ <p align="center">   
+1)How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
 
 SELECT  WEEK(reg_date) AS weeks,
 COUNT(runners.runner_id) AS runners_sign_up
 FROM runners
 GROUP BY WEEK(reg_date); 
 
--- 2)What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order
+ <p align="center"> 
+2)What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order
 SELECT runner_id, AVG(TIMEstampdiff(minute,order_time,pickup_time)) AS average_time
 FROM runner_orders
 INNER JOIN customer_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY runner_id;
 
--- 3)Is there any relationship between the number of pizzas and how long the order takes to prepare?
+ <p align="center"> 
+3)Is there any relationship between the number of pizzas and how long the order takes to prepare?
 SELECT customer_orders.order_id,
 TIMEstampdiff(minute,order_time,pickup_time) AS duration_in_min,
 COUNT(customer_orders.order_id) as orders
@@ -150,7 +154,8 @@ ON runner_orders.order_id = customer_orders.order_id
 GROUP BY order_id
 ORDER BY duration DESC ;
 
--- 4)What was the average distance travelled for each customer?
+ <p align="center"> 
+4)What was the average distance travelled for each customer?
 
 SELECT customer_orders.customer_id, ROUND(AVG(distance),2) 
 FROM customer_orders
@@ -158,26 +163,29 @@ JOIN runner_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY customer_id;
 
--- 5)What was the difference between the longest and shortest delivery times for all orders?
+ <p align="center"> 
+5)What was the difference between the longest and shortest delivery times for all orders?
 
 SELECT MAX(duration)-MIN(duration) as time_difference
 FROM runner_orders;
 
--- 6)What was the average speed for each runner for each delivery and do you notice any trend for these values?
+  <p align="center"> 
+ 6)What was the average speed for each runner for each delivery and do you notice any trend for these values?
 
 SELECT order_id, runner_id, ROUND(AVG(distance/duration * 60),2) AS average_speed
 FROM runner_orders
 GROUP BY order_id,runner_id
 ORDER BY runner_id;
 
--- 7)What is the successful delivery percentage for each runner?
+ <p align="center"> 
+7)What is the successful delivery percentage for each runner?
 SELECT  runner_id, ROUND(AVG(distance/duration *60) , 0 )AS percetage_delivery
 FROM runner_orders
 GROUP BY runner_id
 ORDER BY runner_id;
 
-
--- C. Ingredient Optimisation
+ <p align="center"> 
+C. Ingredient Optimisation
 
 CREATE TEMPORARY TABLE pizza_recipe AS(
 SELECT pizza_id,SUBSTRING_INDEX(SUBSTRING_INDEX(toppings,',',1),',',-1) AS topping_id
@@ -207,14 +215,16 @@ FROM pizza_recipes
 WHERE LENGTH(toppings) - LENGTH(REPLACE(toppings,',','')) + 1>=8
 ORDER BY pizza_id);
 
--- 1)What are the standard ingredients for each pizza?
+ <p align="center"> 
+1)What are the standard ingredients for each pizza?
 SELECT pizza_id, GROUP_CONCAT(topping_name SEPARATOR ',') AS standard_ingredient
 FROM pizza_recipe
 JOIN pizza_toppings
 ON pizza_recipe.topping_id =pizza_toppings.topping_id
 GROUP BY pizza_id;
 
--- 2)What was the most commonly added extra?
+ <p align="center"> 
+2)What was the most commonly added extra?
 
 CREATE TEMPORARY TABLE extra_copy 
 AS SELECT
@@ -224,14 +234,16 @@ CROSS JOIN (SELECT 1 AS n
 UNION 
 SELECT DISTINCT 2) numbers
 WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(extras,',',n),',',-1) REGEXP  '[0-9]' ;
-
+ 
+<p align="left"> 
 SELECT extra1, topping_name, count(extra1) AS no_of_extras
 FROM extra_copy
 INNER JOIN pizza_toppings
 ON extra_copy.extra1 = pizza_toppings.topping_id
 GROUP BY extra1; 
 
--- 3)What was the most common exclusion?
+<p align="center"> 
+3)What was the most common exclusion?
 
 CREATE TEMPORARY TABLE exclusion_copy 
 AS SELECT
@@ -244,13 +256,15 @@ UNION
 SELECT 3 ) numbers
 WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(exclusions,',',n),',',-1) REGEXP  '[0-9]' 
 ;
+ <p align="left"> 
 SELECT exclusion_copy.order_id,exclusion1, topping_name, count(exclusion1) AS most_exclusion
 FROM exclusion_copy
 INNER JOIN pizza_toppings
 ON exclusion_copy.exclusion1 = pizza_toppings.topping_id
 GROUP BY exclusion1; 
 
--- 4)Generate an order item for each record in the customers_orders table in the format of one of the following:
+  <p align="center"> 
+ 4)Generate an order item for each record in the customers_orders table in the format of one of the following:
 -- Meat Lovers
 -- Meat Lovers - Exclude Beef
 -- Meat Lovers - Extra Bacon
@@ -294,7 +308,8 @@ FROM customer_orders
 JOIN pizza_names
 ON pizza_names.pizza_id =customer_orders.pizza_id;
 
--- 5)Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
+<p align="center"> 
+5)Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 
 SELECT order_id,customer_id, pizza_recipe.pizza_id, 
 GROUP_CONCAT(topping_name ORDER BY topping_name SEPARATOR ',') AS standard_ingredient
@@ -305,14 +320,15 @@ JOIN pizza_toppings
 ON pizza_recipe.topping_id = pizza_toppings.topping_id 
 GROUP BY order_id, customer_id,pizza_id;
 
-
--- 7)What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+<p align="center"> 
+7)What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 SELECT pizza_id,runner_orders.order_id,COUNT;
 
 
--- D. Pricing and Ratings
-
--- If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
+ <p align="center"> 
+D. Pricing and Ratings
+<p align="center"> 
+1)If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
 
 SELECT concat('$',
 SUM(CASE WHEN pizza_id = 1 THEN 12 ELSE 10 END)) AS points
@@ -320,8 +336,10 @@ FROM customer_orders
 JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
 
--- What if there was an additional $1 charge for any pizza extras?
--- Add cheese is $1 extra
+<p align="center"> 
+ What if there was an additional $1 charge for any pizza extras?
+<p align="center"> 
+Add cheese is $1 extra
 SELECT concat('$',
 SUM(CASE WHEN pizza_id = 1 THEN 12 
 WHEN pizza_id = 2 THEN  10 
@@ -330,8 +348,8 @@ FROM customer_orders
 JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
 
-
--- The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
+ <p align="center"> 
+ The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
 DROP TABLE IF EXISTS ratings;
 CREATE TABLE ratings ( order_id integer, rating integer);
 INSERT INTO ratings
@@ -349,7 +367,8 @@ VALUES
 (10,4);
 
 
--- Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
+<p align="center"> 
+Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
 -- customer_id
 -- order_id
 -- runner_id
