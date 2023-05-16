@@ -35,7 +35,7 @@ LEFT JOIN menu
 <br />
 
   <p align="center"> 	
--- A. Pizza Metrics
+<b> A. Pizza Metrics</b>
 
  <p align="center">   
 1)How many pizzas were ordered?
@@ -110,6 +110,7 @@ WHERE exclusions REGEXP  '^[0-9]+(,[0-9]+)*$' AND extras REGEXP  '^[0-9]+(,[0-9]
 
 <p align="center"> 
 9)What was the total volume of pizzas ordered for each hour of the day?
+<p align="left"> 
 SELECT DAY(order_time) AS day_of_the_month, HOUR(order_time), COUNT(pizza_id) 
 FROM customer_orders
 GROUP BY order_time
@@ -124,7 +125,7 @@ GROUP BY DAY(order_time)
 ORDER BY day_of_the_month;
 
   <p align="center"> 
- B. Runner and Customer Experience
+<b> B. Runner and Customer Experience</b>
 
 
  <p align="center">   
@@ -185,7 +186,7 @@ GROUP BY runner_id
 ORDER BY runner_id;
 
  <p align="center"> 
-C. Ingredient Optimisation
+<b>C. Ingredient Optimisation</b>
 
 CREATE TEMPORARY TABLE pizza_recipe AS(
 SELECT pizza_id,SUBSTRING_INDEX(SUBSTRING_INDEX(toppings,',',1),',',-1) AS topping_id
@@ -217,6 +218,7 @@ ORDER BY pizza_id);
 
  <p align="center"> 
 1)What are the standard ingredients for each pizza?
+<p align="left"> 
 SELECT pizza_id, GROUP_CONCAT(topping_name SEPARATOR ',') AS standard_ingredient
 FROM pizza_recipe
 JOIN pizza_toppings
@@ -326,7 +328,7 @@ SELECT pizza_id,runner_orders.order_id,COUNT;
 
 
  <p align="center"> 
-D. Pricing and Ratings
+<b>D. Pricing and Ratings</b>
 <p align="center"> 
 1)If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
 
