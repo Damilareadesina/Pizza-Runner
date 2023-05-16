@@ -34,26 +34,31 @@ LEFT JOIN menu
 <br />
 <br />
 
+  <p align="center"> 	
 -- A. Pizza Metrics
 
--- 1)How many pizzas were ordered?
+ <p align="center">   
+1)How many pizzas were ordered?
 
 SELECT COUNT(order_id) AS pizza_order
 FROM customer_orders;
 
--- 2)How many unique customer orders were made?
+ <p align="center"> 
+2)How many unique customer orders were made?
 
 SELECT DISTINCT customer_id, COUNT(order_id) AS no_of_orders
 FROM customer_orders
 GROUP BY customer_id;
 
--- 3)How many successful orders were delivered by each runner?
+  <p align="center"> 
+ 3)How many successful orders were delivered by each runner?
 
 SELECT DISTINCT runner_id, COUNT(pickup_time) AS delivered_orders
 FROM runner_orders
 GROUP BY runner_id;
 
--- 4)How many of each type of pizza was delivered?
+ <p align="center"> 
+4)How many of each type of pizza was delivered?
 
 SELECT DISTINCT pizza_id, COUNT(runner_orders.order_id) AS order_delivered
 FROM runner_orders
@@ -62,7 +67,8 @@ ON customer_orders.order_id = runner_orders.order_id
 GROUP BY pizza_id
 order by runner_orders.order_id;
 
--- 5)How many Vegetarian and Meatlovers were ordered by each customer?
+ <p align="center"> 
+5)How many Vegetarian and Meatlovers were ordered by each customer?
 SELECT   pizza_name, customer_orders.customer_id, COUNT(order_id) AS no_of_orders
 FROM customer_orders
 JOIN pizza_names
@@ -70,7 +76,8 @@ ON customer_orders.pizza_id =pizza_names.pizza_id
 GROUP BY customer_id, customer_orders.pizza_id
 ORDER BY pizza_name;
 
--- 6)What was the maximum number of pizzas delivered in a single order?
+<p align="center"> 
+6)What was the maximum number of pizzas delivered in a single order?
 
 SELECT  customer_orders.order_id, COUNT(runner_orders.order_id) AS max_delivery
 FROM customer_orders
@@ -80,7 +87,8 @@ GROUP BY order_id
 ORDER BY max_delivery DESC
 LIMIT 1;
 
--- 7)For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+ <p align="center"> 
+7)For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 
 SELECT DISTINCT  customer_orders.order_id, 
 COUNT(runner_orders.order_id) AS orders_with_changes
@@ -90,7 +98,8 @@ ON customer_orders.order_id = runner_orders.order_id
 WHERE exclusions or extras REGEXP  '^[0-9]+(,[0-9]+)*$' 
 GROUP BY order_id;
 
--- 8)How many pizzas were delivered that had both exclusions and extras?
+<p align="center"> 
+8)How many pizzas were delivered that had both exclusions and extras?
 
 SELECT DISTINCT  COUNT(customer_orders.order_id), runner_orders.order_id
 FROM customer_orders
@@ -99,13 +108,15 @@ ON customer_orders.order_id = runner_orders.order_id
 WHERE exclusions REGEXP  '^[0-9]+(,[0-9]+)*$' AND extras REGEXP  '^[0-9]+(,[0-9]+)*$'
 ;
 
--- 9)What was the total volume of pizzas ordered for each hour of the day?
+<p align="center"> 
+9)What was the total volume of pizzas ordered for each hour of the day?
 SELECT DAY(order_time) AS day_of_the_month, HOUR(order_time), COUNT(pizza_id) 
 FROM customer_orders
 GROUP BY order_time
 ORDER BY day_of_the_month;
 
--- 10)What was the volume of orders for each day of the week?
+<p align="center"> 
+10)What was the volume of orders for each day of the week?
 
 SELECT WEEK(order_time) AS week ,DAY(order_time) AS day_of_the_month, COUNT(pizza_id) AS volume
 FROM customer_orders
