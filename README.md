@@ -42,21 +42,21 @@ LEFT JOIN menu
 
 SELECT COUNT(order_id) AS pizza_order
 FROM customer_orders;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 2)How many unique customer orders were made?
 
 SELECT DISTINCT customer_id, COUNT(order_id) AS no_of_orders
 FROM customer_orders
 GROUP BY customer_id;
-
-  <p align="center"> 
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+ <p align="center"> 
  3)How many successful orders were delivered by each runner?
 
 SELECT DISTINCT runner_id, COUNT(pickup_time) AS delivered_orders
 FROM runner_orders
 GROUP BY runner_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 4)How many of each type of pizza was delivered?
 
@@ -66,7 +66,7 @@ JOIN customer_orders
 ON customer_orders.order_id = runner_orders.order_id
 GROUP BY pizza_id
 order by runner_orders.order_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 5)How many Vegetarian and Meatlovers were ordered by each customer?
 SELECT   pizza_name, customer_orders.customer_id, COUNT(order_id) AS no_of_orders
@@ -75,7 +75,7 @@ JOIN pizza_names
 ON customer_orders.pizza_id =pizza_names.pizza_id
 GROUP BY customer_id, customer_orders.pizza_id
 ORDER BY pizza_name;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 6)What was the maximum number of pizzas delivered in a single order?
 
@@ -86,7 +86,7 @@ ON customer_orders.order_id = runner_orders.order_id
 GROUP BY order_id
 ORDER BY max_delivery DESC
 LIMIT 1;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 7)For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 
@@ -97,7 +97,7 @@ INNER JOIN runner_orders
 ON customer_orders.order_id = runner_orders.order_id
 WHERE exclusions or extras REGEXP  '^[0-9]+(,[0-9]+)*$' 
 GROUP BY order_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 8)How many pizzas were delivered that had both exclusions and extras?
 
@@ -107,7 +107,7 @@ INNER JOIN runner_orders
 ON customer_orders.order_id = runner_orders.order_id
 WHERE exclusions REGEXP  '^[0-9]+(,[0-9]+)*$' AND extras REGEXP  '^[0-9]+(,[0-9]+)*$'
 ;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 9)What was the total volume of pizzas ordered for each hour of the day?
 <p align="left"> 
@@ -115,7 +115,7 @@ SELECT DAY(order_time) AS day_of_the_month, HOUR(order_time), COUNT(pizza_id)
 FROM customer_orders
 GROUP BY order_time
 ORDER BY day_of_the_month;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 10)What was the volume of orders for each day of the week?
 
@@ -123,7 +123,7 @@ SELECT WEEK(order_time) AS week ,DAY(order_time) AS day_of_the_month, COUNT(pizz
 FROM customer_orders
 GROUP BY DAY(order_time)
 ORDER BY day_of_the_month;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
   <p align="center"> 
 <b> B. Runner and Customer Experience</b>
 
@@ -135,7 +135,7 @@ SELECT  WEEK(reg_date) AS weeks,
 COUNT(runners.runner_id) AS runners_sign_up
 FROM runners
 GROUP BY WEEK(reg_date); 
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 2)What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order
 SELECT runner_id, AVG(TIMEstampdiff(minute,order_time,pickup_time)) AS average_time
@@ -143,7 +143,7 @@ FROM runner_orders
 INNER JOIN customer_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY runner_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 3)Is there any relationship between the number of pizzas and how long the order takes to prepare?
 SELECT customer_orders.order_id,
@@ -154,7 +154,7 @@ INNER JOIN runner_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY order_id
 ORDER BY duration DESC ;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 4)What was the average distance travelled for each customer?
 
@@ -163,13 +163,13 @@ FROM customer_orders
 JOIN runner_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY customer_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 5)What was the difference between the longest and shortest delivery times for all orders?
 
 SELECT MAX(duration)-MIN(duration) as time_difference
 FROM runner_orders;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
   <p align="center"> 
  6)What was the average speed for each runner for each delivery and do you notice any trend for these values?
 
@@ -177,14 +177,14 @@ SELECT order_id, runner_id, ROUND(AVG(distance/duration * 60),2) AS average_spee
 FROM runner_orders
 GROUP BY order_id,runner_id
 ORDER BY runner_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 7)What is the successful delivery percentage for each runner?
 SELECT  runner_id, ROUND(AVG(distance/duration *60) , 0 )AS percetage_delivery
 FROM runner_orders
 GROUP BY runner_id
 ORDER BY runner_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 <b>C. Ingredient Optimisation</b>
 
@@ -224,7 +224,7 @@ FROM pizza_recipe
 JOIN pizza_toppings
 ON pizza_recipe.topping_id =pizza_toppings.topping_id
 GROUP BY pizza_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
 2)What was the most commonly added extra?
 
@@ -236,14 +236,14 @@ CROSS JOIN (SELECT 1 AS n
 UNION 
 SELECT DISTINCT 2) numbers
 WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(extras,',',n),',',-1) REGEXP  '[0-9]' ;
- 
+ <img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="left"> 
 SELECT extra1, topping_name, count(extra1) AS no_of_extras
 FROM extra_copy
 INNER JOIN pizza_toppings
 ON extra_copy.extra1 = pizza_toppings.topping_id
 GROUP BY extra1; 
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 3)What was the most common exclusion?
 
@@ -258,13 +258,14 @@ UNION
 SELECT 3 ) numbers
 WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(exclusions,',',n),',',-1) REGEXP  '[0-9]' 
 ;
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="left"> 
 SELECT exclusion_copy.order_id,exclusion1, topping_name, count(exclusion1) AS most_exclusion
 FROM exclusion_copy
 INNER JOIN pizza_toppings
 ON exclusion_copy.exclusion1 = pizza_toppings.topping_id
 GROUP BY exclusion1; 
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
   <p align="center"> 
  4)Generate an order item for each record in the customers_orders table in the format of one of the following:
 -- Meat Lovers
@@ -309,7 +310,7 @@ END AS order_item
 FROM customer_orders
 JOIN pizza_names
 ON pizza_names.pizza_id =customer_orders.pizza_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 5)Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 
@@ -321,7 +322,7 @@ ON pizza_recipe.pizza_id = customer_orders.pizza_id
 JOIN pizza_toppings
 ON pizza_recipe.topping_id = pizza_toppings.topping_id 
 GROUP BY order_id, customer_id,pizza_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 7)What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 SELECT pizza_id,runner_orders.order_id,COUNT;
@@ -337,7 +338,7 @@ SUM(CASE WHEN pizza_id = 1 THEN 12 ELSE 10 END)) AS points
 FROM customer_orders
 JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
  What if there was an additional $1 charge for any pizza extras?
 <p align="center"> 
@@ -349,7 +350,7 @@ WHEN extras = 4 THEN 1 END)) AS points
 FROM customer_orders
 JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
  The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
 DROP TABLE IF EXISTS ratings;
@@ -367,7 +368,7 @@ VALUES
 (8,3),
 (9,2),
 (10,4);
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 
 <p align="center"> 
 Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
@@ -382,7 +383,7 @@ Using your newly generated table - can you join all of the information together 
 -- Average speed
 -- Total number of pizzas
 -- If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
-
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 CREATE TEMPORARY TABLE all_info
 AS SELECT  customer_id,customer_orders.order_id,runner_id,rating,order_time,pickup_time,
 TIMEstampdiff(minute,order_time,pickup_time),
@@ -395,3 +396,4 @@ ON customer_orders.order_id = runner_orders.order_id
 JOIN ratings
 ON runner_orders.order_id = ratings.order_id
 ;
+<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
