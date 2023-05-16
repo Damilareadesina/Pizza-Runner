@@ -327,7 +327,7 @@ SUM(CASE WHEN pizza_id = 1 THEN 12 ELSE 10 END)) AS points
 FROM customer_orders
 JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/0b454bff-68f5-4d8b-bf10-c636227f23a7.JPG"/>
 <p align="center"> 
  What if there was an additional $1 charge for any pizza extras?
 <p align="center"> 
@@ -357,7 +357,7 @@ VALUES
 (8,3),
 (9,2),
 (10,4);
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/b1e10a24-5047-49a3-8bc5-b20963baeeb6.JPG"/>
 
 <p align="center"> 
 Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
