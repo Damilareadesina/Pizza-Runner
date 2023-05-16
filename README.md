@@ -123,7 +123,7 @@ SELECT  WEEK(reg_date) AS weeks,
 COUNT(runners.runner_id) AS runners_sign_up
 FROM runners
 GROUP BY WEEK(reg_date); 
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/d9b4183c-f656-4d0e-a83e-a0324a004958.JPG"/>
  <p align="center"> 
 2)What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order
 SELECT runner_id, AVG(TIMEstampdiff(minute,order_time,pickup_time)) AS average_time
@@ -131,7 +131,8 @@ FROM runner_orders
 INNER JOIN customer_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY runner_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/8da72589-280f-44c0-a16b-47eab9ac2127.JPG"/>
+   
  <p align="center"> 
 3)Is there any relationship between the number of pizzas and how long the order takes to prepare?
 SELECT customer_orders.order_id,
@@ -142,7 +143,7 @@ INNER JOIN runner_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY order_id
 ORDER BY duration DESC ;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/e03a9eaf-d6b8-4a6b-ab81-01586bdf2725.JPG"/>
  <p align="center"> 
 4)What was the average distance travelled for each customer?
 
@@ -151,13 +152,13 @@ FROM customer_orders
 JOIN runner_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY customer_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/6d58b527-63d2-48f8-a134-ec2f1075dea9.JPG"/>
  <p align="center"> 
 5)What was the difference between the longest and shortest delivery times for all orders?
 
 SELECT MAX(duration)-MIN(duration) as time_difference
 FROM runner_orders;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/777815e9-9884-4124-868e-2bc27d2af60c.JPG"/>
   <p align="center"> 
  6)What was the average speed for each runner for each delivery and do you notice any trend for these values?
 
@@ -165,14 +166,14 @@ SELECT order_id, runner_id, ROUND(AVG(distance/duration * 60),2) AS average_spee
 FROM runner_orders
 GROUP BY order_id,runner_id
 ORDER BY runner_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/ecbef3ba-627c-44a1-b60e-3bacdfd7c23a.JPG"/>
  <p align="center"> 
 7)What is the successful delivery percentage for each runner?
 SELECT  runner_id, ROUND(AVG(distance/duration *60) , 0 )AS percetage_delivery
 FROM runner_orders
 GROUP BY runner_id
 ORDER BY runner_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/f012236d-f04c-4a69-9a29-93b26491290d.JPG"/>
  <p align="center"> 
 <b>C. Ingredient Optimisation</b>
 
@@ -212,7 +213,7 @@ FROM pizza_recipe
 JOIN pizza_toppings
 ON pizza_recipe.topping_id =pizza_toppings.topping_id
 GROUP BY pizza_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/9dd56f70-93be-4c7d-b671-b44b43f5f9ff.JPG"/>
  <p align="center"> 
 2)What was the most commonly added extra?
 
@@ -224,14 +225,14 @@ CROSS JOIN (SELECT 1 AS n
 UNION 
 SELECT DISTINCT 2) numbers
 WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(extras,',',n),',',-1) REGEXP  '[0-9]' ;
- <img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+
 <p align="left"> 
 SELECT extra1, topping_name, count(extra1) AS no_of_extras
 FROM extra_copy
 INNER JOIN pizza_toppings
 ON extra_copy.extra1 = pizza_toppings.topping_id
 GROUP BY extra1; 
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+ <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/9410b9b2-eab4-4210-8baf-63bd4a5f0939.JPG"/>
 <p align="center"> 
 3)What was the most common exclusion?
 
@@ -246,7 +247,7 @@ UNION
 SELECT 3 ) numbers
 WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(exclusions,',',n),',',-1) REGEXP  '[0-9]' 
 ;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/74dedecf-1d9b-4037-8101-fd61b89bd693.JPG"/>
  <p align="left"> 
 SELECT exclusion_copy.order_id,exclusion1, topping_name, count(exclusion1) AS most_exclusion
 FROM exclusion_copy
@@ -298,7 +299,7 @@ END AS order_item
 FROM customer_orders
 JOIN pizza_names
 ON pizza_names.pizza_id =customer_orders.pizza_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/90317fe3-7315-4122-b11a-503a55d7035e.JPG"/>
 <p align="center"> 
 5)Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 
@@ -310,7 +311,7 @@ ON pizza_recipe.pizza_id = customer_orders.pizza_id
 JOIN pizza_toppings
 ON pizza_recipe.topping_id = pizza_toppings.topping_id 
 GROUP BY order_id, customer_id,pizza_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/6a981621-0bac-477a-8a7a-b1533f405a3b.JPG"/>
 <p align="center"> 
 7)What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 SELECT pizza_id,runner_orders.order_id,COUNT;
