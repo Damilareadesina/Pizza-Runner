@@ -63,6 +63,7 @@ JOIN pizza_names
 ON customer_orders.pizza_id =pizza_names.pizza_id
 GROUP BY customer_id, customer_orders.pizza_id
 ORDER BY pizza_name;
+<p align="left">
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/e3fbeea6-5cb2-4905-b650-094446acfcae.JPG"/>
 
 <p align="center"> 
@@ -75,6 +76,7 @@ ON customer_orders.order_id = runner_orders.order_id
 GROUP BY order_id
 ORDER BY max_delivery DESC
 LIMIT 1;
+
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/353e3098-6843-4e0f-8295-82718fd60e57.JPG"/>
  <p align="center"> 
 7)For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
@@ -86,6 +88,7 @@ INNER JOIN runner_orders
 ON customer_orders.order_id = runner_orders.order_id
 WHERE exclusions or extras REGEXP  '^[0-9]+(,[0-9]+)*$' 
 GROUP BY order_id;
+
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/af4e2fbb-1390-402f-a6a3-90d7b2971f30.JPG"/>
 <p align="center"> 
 8)How many pizzas were delivered that had both exclusions and extras?
@@ -104,7 +107,10 @@ SELECT DAY(order_time) AS day_of_the_month, HOUR(order_time), COUNT(pizza_id)
 FROM customer_orders
 GROUP BY order_time
 ORDER BY day_of_the_month;
+
+<p align="left">
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/1468ff1f-6f2e-4e77-b43a-20f6ee63624d.JPG"/>
+
 <p align="center"> 
 10)What was the volume of orders for each day of the week?
 
@@ -124,7 +130,8 @@ SELECT  WEEK(reg_date) AS weeks,
 COUNT(runners.runner_id) AS runners_sign_up
 FROM runners
 GROUP BY WEEK(reg_date); 
-<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/d9b4183c-f656-4d0e-a83e-a0324a004958.JPG"/>
+
+ <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/d9b4183c-f656-4d0e-a83e-a0324a004958.JPG"/>
  <p align="center"> 
 2)What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order
 SELECT runner_id, AVG(TIMEstampdiff(minute,order_time,pickup_time)) AS average_time
@@ -132,6 +139,7 @@ FROM runner_orders
 INNER JOIN customer_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY runner_id;
+<p align="left">
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/8da72589-280f-44c0-a16b-47eab9ac2127.JPG"/>
    
  <p align="center"> 
@@ -144,8 +152,10 @@ INNER JOIN runner_orders
 ON runner_orders.order_id = customer_orders.order_id
 GROUP BY order_id
 ORDER BY duration DESC ;
+<p align="left">
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/e03a9eaf-d6b8-4a6b-ab81-01586bdf2725.JPG"/>
- <p align="center"> 
+ 
+<p align="center"> 
 4)What was the average distance travelled for each customer?
 
 SELECT customer_orders.customer_id, ROUND(AVG(distance),2) 
@@ -167,13 +177,15 @@ SELECT order_id, runner_id, ROUND(AVG(distance/duration * 60),2) AS average_spee
 FROM runner_orders
 GROUP BY order_id,runner_id
 ORDER BY runner_id;
-<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/ecbef3ba-627c-44a1-b60e-3bacdfd7c23a.JPG"/>
+
+ <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/ecbef3ba-627c-44a1-b60e-3bacdfd7c23a.JPG"/>
  <p align="center"> 
 7)What is the successful delivery percentage for each runner?
 SELECT  runner_id, ROUND(AVG(distance/duration *60) , 0 )AS percetage_delivery
 FROM runner_orders
 GROUP BY runner_id
 ORDER BY runner_id;
+<p align="left">
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/f012236d-f04c-4a69-9a29-93b26491290d.JPG"/>
  <p align="center"> 
 <b>C. Ingredient Optimisation</b>
@@ -233,7 +245,8 @@ FROM extra_copy
 INNER JOIN pizza_toppings
 ON extra_copy.extra1 = pizza_toppings.topping_id
 GROUP BY extra1; 
- <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/9410b9b2-eab4-4210-8baf-63bd4a5f0939.JPG"/>
+ <p align="left">
+<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/9410b9b2-eab4-4210-8baf-63bd4a5f0939.JPG"/>
 <p align="center"> 
 3)What was the most common exclusion?
 
@@ -321,7 +334,7 @@ SELECT pizza_id,runner_orders.order_id,COUNT;
  <p align="center"> 
 <b>D. Pricing and Ratings</b>
 <p align="center"> 
-1)If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
+1a)If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
 
 SELECT concat('$',
 SUM(CASE WHEN pizza_id = 1 THEN 12 ELSE 10 END)) AS points
@@ -330,7 +343,7 @@ JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/0b454bff-68f5-4d8b-bf10-c636227f23a7.JPG"/>
 <p align="center"> 
- What if there was an additional $1 charge for any pizza extras?
+ 1b)What if there was an additional $1 charge for any pizza extras?
 <p align="center"> 
 Add cheese is $1 extra
 SELECT concat('$',
@@ -342,8 +355,10 @@ JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
 <img src="https://user-images.githubusercontent.cm/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
- The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
+ 2)The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
+
 DROP TABLE IF EXISTS ratings;
+
 CREATE TABLE ratings ( order_id integer, rating integer);
 INSERT INTO ratings
 ( order_id, rating)
@@ -358,32 +373,6 @@ VALUES
 (8,3),
 (9,2),
 (10,4);
-<img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/b1e10a24-5047-49a3-8bc5-b20963baeeb6.JPG"/>
 
-<p align="center"> 
-Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
--- customer_id
--- order_id
--- runner_id
--- rating
--- order_time
--- pickup_time
--- Time between order and pickup
--- Delivery duration
--- Average speed
--- Total number of pizzas
--- If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
-<img src="https://user-images.githubusercontent.c/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
-CREATE TEMPORARY TABLE all_info
-AS SELECT  customer_id,customer_orders.order_id,runner_id,rating,order_time,pickup_time,
-TIMEstampdiff(minute,order_time,pickup_time),
-duration,
-ROUND(AVG(distance/duration * 60),2),
-COUNT(customer_orders.order_id)
-FROM customer_orders 
-INNER JOIN runner_orders
-ON customer_orders.order_id = runner_orders.order_id
-JOIN ratings
-ON runner_orders.order_id = ratings.order_id
-;
-<img src="https://user-images.githubusercontent.cm/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+ <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/b1e10a24-5047-49a3-8bc5-b20963baeeb6.JPG"/>
+
