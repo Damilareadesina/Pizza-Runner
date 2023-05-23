@@ -64,6 +64,7 @@ ON customer_orders.pizza_id =pizza_names.pizza_id
 GROUP BY customer_id, customer_orders.pizza_id
 ORDER BY pizza_name;
 <img src="https://github.com/Damilareadesina/Dannys-Diner/assets/126564128/e3fbeea6-5cb2-4905-b650-094446acfcae.JPG"/>
+
 <p align="center"> 
 6)What was the maximum number of pizzas delivered in a single order?
 
@@ -95,7 +96,7 @@ INNER JOIN runner_orders
 ON customer_orders.order_id = runner_orders.order_id
 WHERE exclusions REGEXP  '^[0-9]+(,[0-9]+)*$' AND extras REGEXP  '^[0-9]+(,[0-9]+)*$'
 ;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://user-images.githubusercontent.c/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 <p align="center"> 
 9)What was the total volume of pizzas ordered for each hour of the day?
 <p align="left"> 
@@ -254,7 +255,7 @@ FROM exclusion_copy
 INNER JOIN pizza_toppings
 ON exclusion_copy.exclusion1 = pizza_toppings.topping_id
 GROUP BY exclusion1; 
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://user-images.githubusercontent.cm/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
   <p align="center"> 
  4)Generate an order item for each record in the customers_orders table in the format of one of the following:
 -- Meat Lovers
@@ -339,7 +340,7 @@ WHEN extras = 4 THEN 1 END)) AS points
 FROM customer_orders
 JOIN runner_orders
 on customer_orders.order_id = runner_orders.order_id;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://user-images.githubusercontent.cm/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
  <p align="center"> 
  The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
 DROP TABLE IF EXISTS ratings;
@@ -372,7 +373,7 @@ Using your newly generated table - can you join all of the information together 
 -- Average speed
 -- Total number of pizzas
 -- If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://user-images.githubusercontent.c/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
 CREATE TEMPORARY TABLE all_info
 AS SELECT  customer_id,customer_orders.order_id,runner_id,rating,order_time,pickup_time,
 TIMEstampdiff(minute,order_time,pickup_time),
@@ -385,4 +386,4 @@ ON customer_orders.order_id = runner_orders.order_id
 JOIN ratings
 ON runner_orders.order_id = ratings.order_id
 ;
-<img src="https://user-images.githubusercontent.com/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
+<img src="https://user-images.githubusercontent.cm/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
