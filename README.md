@@ -93,14 +93,22 @@ GROUP BY order_id;
 <p align="center"> 
 8)How many pizzas were delivered that had both exclusions and extras?
 
-SELECT DISTINCT  COUNT(customer_orders.order_id), runner_orders.order_id
+SELECT DISTINCT customer_orders.order_id, runner_orders.order_id
+COUNT(CASE
+WHEN exclusions AND extras REGEXP  '[0-9]+'
+THE 1 END) AS count_of_both
 FROM customer_orders
 INNER JOIN runner_orders
 ON customer_orders.order_id = runner_orders.order_id
-WHERE exclusions REGEXP  '^[0-9]+(,[0-9]+)*$' AND extras REGEXP  '^[0-9]+(,[0-9]+)*$'
-;
+GROUP BY order_id
+ORDER BY count_of_both DESC 
+LIMIT 1; 
+
 <img src="https://user-images.githubusercontent.c/126564128/230754211-675ceba1-c056-4d02-bc27-cdda8d18037a.JPG"/>
-<p align="center"> 
+
+ 
+
+<p align="center">
 9)What was the total volume of pizzas ordered for each hour of the day?
 <p align="left"> 
 SELECT DAY(order_time) AS day_of_the_month, HOUR(order_time), COUNT(pizza_id) 
